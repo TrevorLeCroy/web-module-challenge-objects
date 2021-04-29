@@ -93,7 +93,7 @@ Using the reviews array above do the following: (no function needed)
   1. Following the same format (name, rating, feedback), add a new fictitious review object to the reviews array
   2. log the whole array to the console, make sure the new review is inside of it   
 */
-reviews.push({name: 'Trevor', rating: 5, feedback: 'Very cool, will do again.'});
+reviews.push({name: 'Trevor', rating: 4.7, feedback: 'Very cool, will do again.'});
 console.log(reviews);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -157,9 +157,17 @@ Use the getReviewsByRating function below to do the following:
   ]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
-  }
+ function getReviewByRating(_reviews, ratingRange) {
+    const ratings = [];  
+      _reviews.forEach((review) => {
+        if(review.rating >= ratingRange && review.rating < ratingRange+1) {
+          ratings.push(review);
+        }
+      });
+      return ratings;
+}
+
+console.log(getReviewByRating(reviews, 4));
 
   
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪   
@@ -174,11 +182,19 @@ Use the getLongReviews function below to do the following:
     {name: "Julius", rating: 2, feedback: "I was largely unimpressed by this venue. Nothing special on the menu and too expensive. The atmosphere is polarizing, and not for me, but I think some would like it." }
   ]
 */
-
-function getLongReviews(/* code here */) {
-    /* code here */
+function getLongReviews(_reviews) {
+    const longReviews = [];
+    _reviews.forEach((review) => {
+        let words = review.feedback.trim().split(/\s+/).length;
+        if(words > 15) {
+          longReviews.push(review);
+        }
+    });
+    return longReviews;
   }
-  
+
+console.log(getLongReviews(reviews));
+
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
 This stretch goal does not use the reviews data!  You create your own object in this stretch goal.
@@ -198,11 +214,19 @@ Use the carMaker function below to do the following:
 */
 
 
-function carMaker(/* code here */) {
-    /* code here */
-    
+function carMaker(_odometer) {
+    const car = {
+      odometer: _odometer,
+      drive: function(distance) {
+        this.odometer += distance;
+        return this.odometer;
+      },
+    };
+    return car;
 }
 
+let car = carMaker(50);
+console.log(car.drive(500));
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
 function foo(){
